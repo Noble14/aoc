@@ -21,10 +21,20 @@ i, j = start
 dx, dy = (1, 0)
 x, y = (i + dx, j + dy)
 counter = 1
+coords = [(x,y)]
 while map[x][y] != 'S':
     dx, dy = change_dir(map[x][y], (dx, dy))
     x, y = x + dx , y + dy
+    coords.append((x,y))
     counter += 1
 
+sum = 0
+coords.reverse()
+for i in range(len(coords)-1):
+    sum += coords[i][0] * coords[i+1][1] - coords[i+1][0] * coords[i][1]
+
+sum += coords[-1][0] * coords[0][1] - coords[0][0] * coords[-1][1]
+
 print(counter/2)
+print(sum/2 - (counter/2 - 1))
 
